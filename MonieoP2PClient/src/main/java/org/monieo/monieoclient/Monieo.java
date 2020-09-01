@@ -58,6 +58,7 @@ public class Monieo {
 	        }
 	        
 	        version = myRelease;
+	        //s
 	        
 	    } catch (IOException ex) {
 	    	
