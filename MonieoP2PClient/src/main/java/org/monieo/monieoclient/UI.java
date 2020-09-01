@@ -26,11 +26,12 @@ public class UI {
 
 	private void initialize() {
 		frame = new JFrame();
+		frame.setTitle("Monieo Client Version " + Monieo.version);
 		frame.setBounds(100, 100, 764, 485);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Version 0.1");
+		JLabel lblNewLabel = new JLabel("v" + Monieo.version);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel.setBounds(10, 414, 119, 21);
 		frame.getContentPane().add(lblNewLabel);
