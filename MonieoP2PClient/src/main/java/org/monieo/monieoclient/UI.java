@@ -134,5 +134,8 @@ public class UI {
 		lblNewLabel_2.setBounds(502, 296, 236, 24);
 		frame.getContentPane().add(lblNewLabel_2);
 		
+		frame.setVisible(true);
+		frame.setResizable(false);
+		
 	}
 }
