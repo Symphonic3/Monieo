@@ -23,9 +23,6 @@ public class Monieo {
 			e.printStackTrace();
 		}
 		
-		UI ui = new UI();
-		ui.Start();
-		
 		System.out.println("Version: " + properties.getProperty("version"));
 		System.out.println("Please look towards the GUI application.");
 		System.out.println("");
@@ -62,6 +59,9 @@ public class Monieo {
 	    	ex.printStackTrace();
 	    	
 	    }
+	    
+		UI ui = new UI();
+		ui.Start();
 		
 	}
 
