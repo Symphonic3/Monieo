@@ -13,7 +13,9 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 public class Monieo {
-
+	
+	public static UI ui;
+	
 	public static void main(String[] args) {
 		
 		final Properties properties = new Properties();
@@ -60,7 +62,7 @@ public class Monieo {
 	    	
 	    }
 	    
-		UI ui = new UI();
+		ui = new UI();
 		ui.Start();
 		
 	}
