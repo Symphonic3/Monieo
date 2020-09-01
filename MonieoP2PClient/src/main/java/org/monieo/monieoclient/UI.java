@@ -16,15 +16,10 @@ public class UI {
 	private JTextField textField;
 	private JTextField textField_1;
 
-	public void Start() {
-		
-		initialize();
-	}
-	
 	public UI() {
 	}
 
-	private void initialize() {
+	public void initialize() {
 		frame = new JFrame();
 		frame.setTitle("Monieo Client Version " + Monieo.version);
 		frame.setBounds(100, 100, 764, 485);

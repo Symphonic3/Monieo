@@ -66,7 +66,7 @@ public class Monieo {
 	    }
 	    
 		ui = new UI();
-		ui.Start();
+		ui.initialize();
 		
 	}
 
