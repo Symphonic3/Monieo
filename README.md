@@ -1,2 +1,34 @@
 # Monieo
 An experimental cryptocurrency
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+☺
