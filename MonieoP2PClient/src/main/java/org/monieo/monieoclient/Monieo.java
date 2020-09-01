@@ -22,6 +22,7 @@ public class Monieo {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		//gay
 		System.out.println("Version: " + properties.getProperty("version"));
 		System.out.println("Please look towards the GUI application.");
 		System.out.println("");
