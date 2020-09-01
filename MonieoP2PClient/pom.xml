@@ -4,6 +4,10 @@
   <artifactId>MonieoP2PClient</artifactId>
   <version>0.2</version>
   <name>MonieoP2PClient</name>
+<properties>
+   <maven.compiler.source>1.8</maven.compiler.source>
+   <maven.compiler.target>1.8</maven.compiler.target>
+</properties>
   <build>
   <plugins>
       <plugin>
