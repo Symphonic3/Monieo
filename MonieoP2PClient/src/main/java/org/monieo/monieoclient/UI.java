@@ -96,30 +96,18 @@ public class UI {
 		lblMining.setBounds(529, 3, 185, 24);
 		frame.getContentPane().add(lblMining);
 		
-		final JButton btnNewButton_1 = new JButton();
-		btnNewButton_1.setBackground(Color.GRAY);
-		btnNewButton_1.setEnabled(false);
-		btnNewButton_1.setBounds(580, 71, 27, 23);
-		frame.getContentPane().add(btnNewButton_1);
-		
-		
-		final JButton button = new JButton();
-		button.setBackground(Color.GRAY);
-		button.setEnabled(false);
-		button.setBounds(628, 71, 27, 23);
-		frame.getContentPane().add(button);
-		
-		final JToggleButton tglbtnNewToggleButton = new JToggleButton("");
+		JToggleButton tglbtnNewToggleButton = new JToggleButton("Off");
 		tglbtnNewToggleButton.setBounds(580, 71, 75, 23);
 		tglbtnNewToggleButton.addActionListener(new ActionListener() {
 			
+			@Override
 			public void actionPerformed(ActionEvent e) {
-				btnNewButton_1.setVisible(!tglbtnNewToggleButton.isSelected());
-				button.setVisible(tglbtnNewToggleButton.isSelected());
 				
-				/*
-				 * super cool code to start mining
-				 */
+				if (tglbtnNewToggleButton.isSelected()) {
+					tglbtnNewToggleButton.setText("On");
+				} else {
+					tglbtnNewToggleButton.setText("Off");
+				}
 			}
 		});
 		frame.getContentPane().add(tglbtnNewToggleButton);
@@ -129,18 +117,6 @@ public class UI {
 		lblMiningEnabled.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblMiningEnabled.setBounds(529, 38, 185, 24);
 		frame.getContentPane().add(lblMiningEnabled);
-		
-		JLabel label_6 = new JLabel("Off");
-		label_6.setHorizontalAlignment(SwingConstants.CENTER);
-		label_6.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		label_6.setBounds(525, 70, 50, 24);
-		frame.getContentPane().add(label_6);
-		
-		JLabel label_7 = new JLabel("On");
-		label_7.setHorizontalAlignment(SwingConstants.CENTER);
-		label_7.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		label_7.setBounds(657, 70, 50, 24);
-		frame.getContentPane().add(label_7);
 		
 		JLabel lblMiningInformation = new JLabel("Mining Statistics:");
 		lblMiningInformation.setHorizontalAlignment(SwingConstants.CENTER);
@@ -158,9 +134,6 @@ public class UI {
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setBounds(502, 296, 236, 24);
 		frame.getContentPane().add(lblNewLabel_2);
-		
-		frame.setVisible(true);
-		frame.setResizable(false);
 		
 	}
 }
