@@ -15,6 +15,7 @@ import org.json.JSONObject;
 public class Monieo {
 	
 	public static UI ui;
+	public static double version;
 	
 	public static void main(String[] args) {
 		
@@ -55,6 +56,8 @@ public class Monieo {
 	        	System.exit(0);
 	        	
 	        }
+	        
+	        version = myRelease;
 	        
 	    } catch (IOException ex) {
 	    	
