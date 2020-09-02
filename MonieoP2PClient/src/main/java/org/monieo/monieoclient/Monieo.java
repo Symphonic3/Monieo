@@ -31,33 +31,6 @@ public class Monieo {
 
 	public static void main(String[] args) {
 
-		// rsa key pair generation and writing stuff
-		try {
-			KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
-			kpg.initialize(2048);
-			KeyPair kp = kpg.generateKeyPair();
-
-			File directory = new File(System.getenv("APPDATA") + "\\monieo");
-			if (!directory.exists()) {
-				new File(System.getenv("APPDATA") + "\\monieo").mkdir();
-				
-				File prvFile = new File(System.getenv("APPDATA") + "\\monieo\\public.txt");
-				prvFile.createNewFile();
-				writer = new FileWriter(prvFile);
-				writer.write(kp.getPublic().toString());
-				writer.close();
-				writer = null;
-				
-				File pubFile = new File(System.getenv("APPDATA") + "\\monieo\\private.txt");
-				pubFile.createNewFile();
-				writer = new FileWriter(pubFile);
-				writer.write(kp.getPrivate().toString());
-				writer.close();
-			}
-		} catch (NoSuchAlgorithmException | IOException e2) {
-			e2.printStackTrace();
-		}
-
 		final Properties properties = new Properties();
 		try {
 			properties.load(Monieo.class.getClassLoader().getResourceAsStream("project.properties"));
@@ -133,53 +106,37 @@ public class Monieo {
 			System.exit(0);
 
 		}
+		
+		// rsa key pair generation and writing stuff
+		try {
+			KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
+			kpg.initialize(2048);
+			KeyPair kp = kpg.generateKeyPair();
+
+			File directory = new File(System.getenv("APPDATA") + "/monieo");
+			if (!directory.exists()) {
+				new File(System.getenv("APPDATA") + "/monieo").mkdir();
+				
+				File prvFile = new File(System.getenv("APPDATA") + "/monieo/privkey.pem");
+				prvFile.createNewFile();
+				writer = new FileWriter(prvFile);
+				writer.write(kp.getPrivate().toString());
+				writer.close();
+				writer = null;
+				
+				File pubFile = new File(System.getenv("APPDATA") + "/monieo/pubkey.pem");
+				pubFile.createNewFile();
+				writer = new FileWriter(pubFile);
+				writer.write(kp.getPublic().toString());
+				writer.close();
+			}
+		} catch (NoSuchAlgorithmException | IOException e2) {
+			e2.printStackTrace();
+		}
 
 		ui = new UI();
 		ui.initialize();
 
 	}
+	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//scp 173
