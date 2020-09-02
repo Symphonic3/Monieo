@@ -3,6 +3,7 @@ package org.monieo.monieoclient;
 import java.io.IOException;
 import java.util.Properties;
 
+import javax.management.RuntimeErrorException;
 import javax.swing.JOptionPane;
 
 import org.apache.http.HttpResponse;
@@ -39,6 +40,7 @@ public class Monieo {
 	        HttpGet request = new HttpGet(url);
 	        request.addHeader("content-type", "application/json");
 	        HttpResponse result = httpClient.execute(request);
+	        if (result.getStatusLine().getStatusCode() != 200) throw new RuntimeException("Could not parse github API");
 	        String json = EntityUtils.toString(result.getEntity(), "UTF-8");
 
 	        JSONObject response = new JSONObject(json);
@@ -51,8 +53,15 @@ public class Monieo {
 	        	
 	        	String link = "https://github.com/Symphonic3/Monieo/releases/tag/" + releaseLatest;
 	        	
-	        	JOptionPane.showMessageDialog(null, new MessageWithLink("New update available. Please download and use version " + releaseLatest + " from github:"
-	        			+ "\n <a href=\"" + link + "\">Click here</a>"), "New update available!", JOptionPane.ERROR_MESSAGE);
+	        	int res = JOptionPane.showOptionDialog(null, new MessageWithLink("New update available. Press 'OK' to automatically download, or download and use version " + releaseLatest + " from github:"
+	        			+ "\n <a href=\"" + link + "\">Click here</a>"), "New update available!", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null);
+	        	
+	        	/*if (res == 0) {
+	        		
+	        		String url = response.getJSONArray("assets").getJSONObject(index)
+	        		
+	        	}*/
+	        	
 	        	System.exit(0);
 	        	
 	        }
