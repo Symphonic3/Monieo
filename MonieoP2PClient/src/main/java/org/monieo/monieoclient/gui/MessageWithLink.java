@@ -1,4 +1,4 @@
-package org.monieo.monieoclient;
+package org.monieo.monieoclient.gui;
 
 import java.awt.Color;
 import java.awt.Font;

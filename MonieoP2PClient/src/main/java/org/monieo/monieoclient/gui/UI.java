@@ -1,4 +1,4 @@
-package org.monieo.monieoclient;
+package org.monieo.monieoclient.gui;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
+
+import org.monieo.monieoclient.Monieo;
 
 public class UI {
 	private JFrame frame;
