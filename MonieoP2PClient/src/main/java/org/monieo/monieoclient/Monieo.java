@@ -1,11 +1,15 @@
 package org.monieo.monieoclient;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Properties;
 
 import javax.management.RuntimeErrorException;
 import javax.swing.JOptionPane;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -56,11 +60,25 @@ public class Monieo {
 	        	int res = JOptionPane.showOptionDialog(null, new MessageWithLink("New update available. Press 'OK' to automatically download, or download and use version " + releaseLatest + " from github:"
 	        			+ "\n <a href=\"" + link + "\">Click here</a>"), "New update available!", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null);
 	        	
-	        	/*if (res == 0) {
+	        	if (res == 0) {
 	        		
-	        		String url = response.getJSONArray("assets").getJSONObject(index)
+	        		JSONObject assetInfo = response.getJSONArray("assets").getJSONObject(0);
+	        		String downloadURL = assetInfo.getString("browser_download_url");
+	        		String fileName = assetInfo.getString("name");
 	        		
-	        	}*/
+	        		String jarFol = null;
+					try {
+						jarFol = new File(Monieo.class.getProtectionDomain().getCodeSource().getLocation()
+							    .toURI()).getParent();
+					} catch (URISyntaxException e) {
+						e.printStackTrace();
+					}
+	        		
+	        		File newJar = new File(jarFol + "/" + fileName);
+	        		
+	        		FileUtils.copyURLToFile(new URL(downloadURL), newJar);
+	        		
+	        	}
 	        	
 	        	System.exit(0);
 	        	
