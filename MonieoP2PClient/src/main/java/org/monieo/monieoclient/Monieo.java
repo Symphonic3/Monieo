@@ -109,27 +109,34 @@ public class Monieo {
 		
 		// rsa key pair generation and writing stuff
 		try {
-			KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
-			kpg.initialize(2048);
-			KeyPair kp = kpg.generateKeyPair();
-
-			File directory = new File(System.getenv("APPDATA") + "/monieo");
+			String appdata = System.getenv("APPDATA");
+			
+			File directory = new File(appdata + "/monieo");
 			if (!directory.exists()) {
-				new File(System.getenv("APPDATA") + "/monieo").mkdir();
+				directory.mkdir();
+			}
+			
+			File prvFile = new File(appdata + "/monieo/privkey.pem");
+			if (!prvFile.exists()) {
 				
-				File prvFile = new File(System.getenv("APPDATA") + "/monieo/privkey.pem");
+				KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
+				kpg.initialize(2048);
+				KeyPair kp = kpg.generateKeyPair();
+				
 				prvFile.createNewFile();
 				writer = new FileWriter(prvFile);
 				writer.write(kp.getPrivate().toString());
 				writer.close();
 				writer = null;
 				
-				File pubFile = new File(System.getenv("APPDATA") + "/monieo/pubkey.pem");
+				File pubFile = new File(appdata + "/monieo/pubkey.pem");
 				pubFile.createNewFile();
 				writer = new FileWriter(pubFile);
 				writer.write(kp.getPublic().toString());
 				writer.close();
+				
 			}
+			
 		} catch (NoSuchAlgorithmException | IOException e2) {
 			e2.printStackTrace();
 		}
