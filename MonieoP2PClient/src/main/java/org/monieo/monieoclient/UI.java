@@ -3,7 +3,9 @@ package org.monieo.monieoclient;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,6 +23,11 @@ public class UI {
 
 	public void initialize() {
 		frame = new JFrame();
+		try {
+			frame.setIconImage(ImageIO.read(Monieo.class.getClassLoader().getResourceAsStream("icon.png")));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		frame.setTitle("Monieo Client Version " + Monieo.version);
 		frame.setBounds(100, 100, 764, 485);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
