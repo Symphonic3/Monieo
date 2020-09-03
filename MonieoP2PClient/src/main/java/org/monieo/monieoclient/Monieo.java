@@ -3,11 +3,13 @@ package org.monieo.monieoclient;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.Properties;
 
 import javax.swing.JOptionPane;
@@ -27,7 +29,6 @@ public class Monieo {
 
 	public static UI ui;
 	public static double version;
-	public static FileWriter writer = null;
 
 	public static void main(String[] args) {
 
@@ -109,6 +110,7 @@ public class Monieo {
 		
 		// rsa key pair generation and writing stuff
 		try {
+			
 			String appdata = System.getenv("APPDATA");
 			
 			File directory = new File(appdata + "/monieo");
@@ -116,24 +118,29 @@ public class Monieo {
 				directory.mkdir();
 			}
 			
-			File prvFile = new File(appdata + "/monieo/privkey.pem");
+			File prvFile = new File(appdata + "/monieo/private.key");
+			File pubFile = new File(appdata + "/monieo/public.key");
 			if (!prvFile.exists()) {
+				
+				Base64.Encoder encoder = Base64.getEncoder();
 				
 				KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
 				kpg.initialize(2048);
 				KeyPair kp = kpg.generateKeyPair();
 				
 				prvFile.createNewFile();
-				writer = new FileWriter(prvFile);
-				writer.write(kp.getPrivate().toString());
-				writer.close();
-				writer = null;
+				Writer prv = new FileWriter(prvFile);
+				prv.write("-----BEGIN RSA PRIVATE KEY-----\n");
+				prv.write(encoder.encodeToString(kp.getPrivate().getEncoded()));
+				prv.write("\n-----END RSA PRIVATE KEY-----\n");
+				prv.close();
 				
-				File pubFile = new File(appdata + "/monieo/pubkey.pem");
 				pubFile.createNewFile();
-				writer = new FileWriter(pubFile);
-				writer.write(kp.getPublic().toString());
-				writer.close();
+				Writer pub = new FileWriter(pubFile);
+				pub.write("-----BEGIN RSA PUBLIC KEY-----\n");
+				pub.write(encoder.encodeToString(kp.getPublic().getEncoded()));
+				pub.write("\n-----END RSA PUBLIC KEY-----\n");
+				pub.close();
 				
 			}
 			
