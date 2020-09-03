@@ -6,9 +6,15 @@ import java.io.IOException;
 import java.io.Writer;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 import java.util.Properties;
 
@@ -29,6 +35,8 @@ public class Monieo {
 
 	public static UI ui;
 	public static double version;
+	
+	public static KeyPair keys;
 
 	public static void main(String[] args) {
 
@@ -144,7 +152,21 @@ public class Monieo {
 				
 			}
 			
-		} catch (NoSuchAlgorithmException | IOException e2) {
+			KeyFactory kf = KeyFactory.getInstance("RSA");
+			
+		    byte[] prvkeyBytes = FileUtils.readFileToByteArray(prvFile);
+		    PKCS8EncodedKeySpec specPrv =
+		      new PKCS8EncodedKeySpec(prvkeyBytes);
+		    PrivateKey prvKey = kf.generatePrivate(specPrv);
+			
+		    byte[] pubkeyBytes = FileUtils.readFileToByteArray(pubFile);
+		    X509EncodedKeySpec specPub =
+		      new X509EncodedKeySpec(pubkeyBytes);
+		    PublicKey pubKey = kf.generatePublic(specPub);
+		    
+		    keys = new KeyPair(pubKey, prvKey);
+			
+		} catch (NoSuchAlgorithmException | IOException | InvalidKeySpecException e2) {
 			e2.printStackTrace();
 		}
 
