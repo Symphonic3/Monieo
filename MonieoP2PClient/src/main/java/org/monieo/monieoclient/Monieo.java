@@ -74,7 +74,13 @@ public class Monieo {
 		}
 
 		JSONObject response = new JSONObject(json);
-
+		
+		try {
+			httpClient.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
 		double releaseLatest = Double.valueOf(response.getString("tag_name"));
 		version = Double.valueOf(properties.getProperty("version"));
 
