@@ -31,6 +31,8 @@ import org.json.JSONObject;
 import org.monieo.monieoclient.gui.MessageWithLink;
 import org.monieo.monieoclient.gui.UI;
 
+import zoo.zoo;
+
 public class Monieo {
 
 	public static UI ui;
@@ -41,7 +43,7 @@ public class Monieo {
 	public static void main(String[] args) {
 		
 		//monkey
-		
+		zoo zoo = new zoo();
 
 		final Properties properties = new Properties();
 		try {
