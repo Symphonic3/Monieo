@@ -1,7 +1,6 @@
-package org.monieo.monieoclient;
+package zoo;
 
-public class monkey {
-
+public class monkey extends animal {
 //     __
 //w  c(..)o   (
 //\__(-)    __)
